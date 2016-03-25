@@ -15,8 +15,10 @@ public class Client extends Thread
    //Give a standard packet size
    private final static int packetsize = 512;
    private static MulticastSocket socket;
+   private static DatagramSocket socket1;
    public static void main( String args[] )
    {
+   	MulticastSocket socket = null;
       // Check the whether the arguments are given
       if( args.length != 1 )
       {
@@ -33,18 +35,19 @@ public class Client extends Thread
          InetAddress host = InetAddress.getByName( args[0] ) ;
          
          // Construct the socket
-         socket = new MulticastSocket( port ) ;
+         socket = new MulticastSocket() ;
+         socket1 = new DatagramSocket();
          
          //Initiating the components
 		 InitiateComponents ic = new InitiateComponents();
 		 ic.IniComp();
 		 
 		 //Starting Threads to record and send packets
-         Recording recod =new Recording(socket,host,port,ic);
+         Recording recod =new Recording(socket1,host,port,ic);
          recod.start();
          
          //Starting thread to recieve packets and play        
-         Reception rcp1=new Reception(socket,packetsize,ic);
+         Reception rcp1=new Reception(socket,host,packetsize,ic);
          rcp1.start();      
 
       }
