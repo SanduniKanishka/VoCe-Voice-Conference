@@ -9,13 +9,13 @@ import java.net.* ;
 public class Recording extends Thread{
 	
     InetAddress host;
-    MulticastSocket socket;
+    DatagramSocket socket;
     int portClient2;
     InitiateComponents ic;
     boolean stopCapture = false;
     ByteArrayOutputStream byteArrayOutputStream;
 	
-    public Recording(MulticastSocket socket,InetAddress host,int portClient2,InitiateComponents ic){
+    public Recording(DatagramSocket socket,InetAddress host,int portClient2,InitiateComponents ic){
         
 	this.host=host;
 	this.portClient2=portClient2;
