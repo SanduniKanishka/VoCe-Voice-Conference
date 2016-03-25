@@ -14,7 +14,7 @@ public class Client extends Thread
 	
    //Give a standard packet size
    private final static int packetsize = 512;
-   private static DatagramSocket socket;
+   private static MulticastSocket socket;
    public static void main( String args[] )
    {
       // Check the whether the arguments are given
@@ -33,7 +33,7 @@ public class Client extends Thread
          InetAddress host = InetAddress.getByName( args[0] ) ;
          
          // Construct the socket
-         socket = new DatagramSocket( port ) ;
+         socket = new MulticastSocket( port ) ;
          
          //Initiating the components
 		 InitiateComponents ic = new InitiateComponents();
@@ -48,7 +48,7 @@ public class Client extends Thread
          rcp1.start();      
 
       }
-      catch(UnknownHostException | SocketException ee){
+      catch(Exception ee){
          System.out.println(ee);
       }
       finally{
